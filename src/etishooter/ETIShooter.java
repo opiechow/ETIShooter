@@ -1,28 +1,32 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package etishooter;
 
-import javax.swing.JFrame;
+import java.awt.BorderLayout;
+import java.awt.Canvas;
+import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import javax.swing.*;
 
-/**
- *
- * @author Oskar
- */
+
 public class ETIShooter extends JFrame {
     ETIShooter(){
         super("ETI Shooter");
         setBounds(50,50,800,600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JPanel menu = new JPanel();
+        menu.setLayout(new BorderLayout());
+        menu.setVisible(true);
+        JButton Przycisk1 = new JButton();
+        Przycisk1.setText("OPCJA 1");
+        Przycisk1.setVisible(true);
+        menu.add(Przycisk1);
+        
         setResizable(false);
         setVisible(true);
-    }
-
-    /**
-     * @param args the command line arguments
-     */
+        
+              
+    
+    }    
     public static void main(String[] args) {
         ETIShooter okno = new ETIShooter();
         okno.repaint();
