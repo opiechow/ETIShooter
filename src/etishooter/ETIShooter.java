@@ -13,7 +13,7 @@ import javax.swing.JFrame;
  */
 public class ETIShooter extends JFrame {
     ETIShooter(){
-        super("ETIShooter");
+        super("ETI Shooter");
         setBounds(50,50,800,600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
