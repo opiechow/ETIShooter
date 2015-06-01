@@ -50,6 +50,7 @@ class Cel
 
 public class ETIShooter extends JFrame 
 {
+    private Container content;
     private JButton przyciski[];
     private JTextArea oknoTekstowe;
     private int punktacja = 0;
@@ -81,6 +82,7 @@ public class ETIShooter extends JFrame
             else if(bt==przyciski[1])
             {
                 tryb = 1; 
+                content.setVisible(false);
             }         
         }
     }
@@ -131,7 +133,7 @@ public class ETIShooter extends JFrame
 
         oknoTekstowe = new JTextArea("ETIShooter\n");
 
-        Container content = getContentPane();
+        content = getContentPane();
         content.setLayout(new BorderLayout());
 
         content.add(panelPrzyciski,BorderLayout.NORTH);
@@ -190,8 +192,8 @@ public class ETIShooter extends JFrame
         });
         
         tlo1 = new ImageIcon("res/tlo1.jpeg").getImage();
-        celDobry = new ImageIcon("res/celDobry.jpg").getImage();
-        celZly = new ImageIcon("res/celZly.jpg").getImage();
+        celDobry = new ImageIcon("res/celDobry.png").getImage();
+        celZly = new ImageIcon("res/celZly.png").getImage();
     }    
     
     public static void main(String[] args) 
@@ -200,54 +202,57 @@ public class ETIShooter extends JFrame
         okno.repaint();
     }
     
- /*   public void paint(Graphics g)
+    public void paint(Graphics g)
     {
-        try 
-        {
-            Thread.sleep(100);    // zeby uniknac NullPointerException przy inicjalizacji
-        } 
-        catch(InterruptedException ex) 
-        {
-            Thread.currentThread().interrupt();
+        if (tryb == 1)
+        {    
+            try 
+            {
+                Thread.sleep(100);    // zeby uniknac NullPointerException przy inicjalizacji
+            } 
+            catch(InterruptedException ex) 
+            {
+                Thread.currentThread().interrupt();
+            }
+
+            BufferStrategy bstrategy = this.getBufferStrategy();
+            Graphics2D g2d = (Graphics2D)bstrategy.getDrawGraphics();
+
+
+            g2d.drawImage(tlo1, 0, 0, 800 , 600, null);
+            g2d.setColor(Color.RED);
+            g2d.setFont(new Font("Arial",Font.BOLD,20));
+            g2d.drawString("PUNKTACJA: " + punktacja, 5, 55);
+
+            for (int i=0; i < 10; i++)
+            {
+                if (!cele[i].GetTrafiony())
+               {
+                    try
+                    {
+                        if (cele[i].GetDobry())
+                            g2d.drawImage(celDobry, 
+                                          cele[i].GetKwadratura().x,
+                                          cele[i].GetKwadratura().y,
+                                          cele[i].GetKwadratura().width,
+                                          cele[i].GetKwadratura().height,
+                                          null);
+                        else
+                           g2d.drawImage(celZly, 
+                                         cele[i].GetKwadratura().x,
+                                         cele[i].GetKwadratura().y,
+                                         cele[i].GetKwadratura().width,
+                                         cele[i].GetKwadratura().height,
+                                         null);
+                    }
+                    catch (NullPointerException e)
+                    {
+                        continue;
+                    }
+               }
+            }        
+            g2d.dispose();
+            bstrategy.show();
         }
-        
-        BufferStrategy bstrategy = this.getBufferStrategy();
-        Graphics2D g2d = (Graphics2D)bstrategy.getDrawGraphics();
-        
-        
-        g2d.drawImage(tlo1, 0, 0, 800 , 600, null);
-        g2d.setColor(Color.RED);
-        g2d.setFont(new Font("Arial",Font.BOLD,20));
-        g2d.drawString("PUNKTACJA: " + punktacja, 5, 55);
-        
-        for (int i=0; i < 10; i++)
-        {
-            if (!cele[i].GetTrafiony())
-           {
-                try
-                {
-                    if (cele[i].GetDobry())
-                        g2d.drawImage(celDobry, 
-                                      cele[i].GetKwadratura().x,
-                                      cele[i].GetKwadratura().y,
-                                      cele[i].GetKwadratura().width,
-                                      cele[i].GetKwadratura().height,
-                                      null);
-                    else
-                       g2d.drawImage(celZly, 
-                                     cele[i].GetKwadratura().x,
-                                     cele[i].GetKwadratura().y,
-                                     cele[i].GetKwadratura().width,
-                                     cele[i].GetKwadratura().height,
-                                     null);
-                }
-                catch (NullPointerException e)
-                {
-                    continue;
-                }
-           }
-        }        
-        g2d.dispose();
-        bstrategy.show();        
-    }   */ 
+    }    
 }
